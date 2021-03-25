@@ -78,12 +78,26 @@ class Home extends React.Component{
           console.log(error);
         });
     }
+    getPelanggaranSiswa = () => {
+        let url = "http://localhost:2000/pelanggaran_siswa";
+        
+        
+        axios.get(url, this.headerConfig())
+        .then(response => {
+        
+          this.setState({pelanggaransiswaCount: response.data.count});
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
     componentDidMount(){
         this.getUser()
         this.getPegawai()
         this.getPelanggaran()
         this.getJurusan()
         this.getSiswa()
+        this.getPelanggaranSiswa()
     }
     render(){
         return(
@@ -148,6 +162,21 @@ class Home extends React.Component{
                                     </h4>
                                     <h1 className="text-white">
                                         <strong>{this.state.jurusanCount}</strong>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        {/* pelanggaran count */}
+                        <div className="col-lg-4 col-md-6 col-sm-12 mt-2">
+                            <div className="card">
+                                <div className="card-body bg-danger">
+                                    <h4 className="text-dark">
+                                        <strong>Jumlah Pelanggaran Siswa</strong>
+                                    </h4>
+                                    <h1 className="text-white">
+                                        <strong>{this.state.pelanggaransiswaCount}</strong>
                                     </h1>
                                 </div>
                             </div>
